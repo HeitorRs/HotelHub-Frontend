@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import '../App.css'
+import Header from './shared/Header';
+import Footer from './shared/Footer';
 
 const ListaQuartos= () => {
   const { id } = useParams();
@@ -10,7 +12,7 @@ const ListaQuartos= () => {
   useEffect(() => {
     axios.get(`https://localhost:7074/api/Quartos/${id}`)
       .then((response) => {
-        setListaQuartos(response.data);
+          setListaQuartos(response.data);
       })
       .catch((error) => {
         console.error('Erro ao buscar os dados:', error);
@@ -19,7 +21,7 @@ const ListaQuartos= () => {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <h2 className="m-3 d-flex justify-content-center">Hotéis</h2>
+      <h2 className="m-3 d-flex justify-content-center">Quartos</h2>
       <div className="album py-5">
         <div className="container">
           <div className="row">
@@ -32,9 +34,9 @@ const ListaQuartos= () => {
                     )}
                   </div>
                   <div className="card-body">
-                    <p><b>Diária:</b>{quarto.preco}</p>
+                    <p><b>Preço:</b><br />R${quarto.preco}</p>
                     <p className="card-text"><b>Descrição:</b><br />{quarto.descricao}</p>
-                    <a href={`/hotel/${quarto.quartoId}`}>Reservar</a>
+                    <a href={`/hotel/${quarto.quartoId}`}>Ver Detalhes</a>
                   </div>
                 </div>
               </div>

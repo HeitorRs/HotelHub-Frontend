@@ -45,7 +45,7 @@ const DetalhesHotel = () => {
           </div>
           <p>Cidade: {hotel.cidade}</p>
           <p>Descrição: {hotel.descricao}</p>
-          <a href={`/Quarto/${hotel.hotelId}`}>Reservar</a>
+          <a href={`/Quartos/${hotel.hotelId}`}>Reservar</a>
         </>
       ) : (
         <p>Carregando...</p>

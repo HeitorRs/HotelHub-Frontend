@@ -21,7 +21,7 @@ root.render(
       <Route path='/Login' Component={Login}/>
       <Route path='/Cadastro' Component={Cadastro}/>
       <Route path='/Hotel/:id' Component={DetalhesHotel}/>
-      <Route path='/Quarto/:id' Component={ListaQuartos}/>
+      <Route path='/Quartos/:id' Component={ListaQuartos}/>
       <Route path='*' Component={ErrorPage} />
     </Routes>
   </BrowserRouter>
