@@ -20,6 +20,8 @@ const ListaQuartos= () => {
   }, []);
 
   return (
+    <div>
+      <Header></Header>
     <div className="d-flex flex-column min-vh-100">
       <h2 className="m-3 d-flex justify-content-center">Quartos</h2>
       <div className="album py-5">
@@ -36,7 +38,7 @@ const ListaQuartos= () => {
                   <div className="card-body">
                     <p><b>Preço:</b><br />R${quarto.preco}</p>
                     <p className="card-text"><b>Descrição:</b><br />{quarto.descricao}</p>
-                    <a href={`/hotel/${quarto.quartoId}`}>Ver Detalhes</a>
+                    <a href={`/Quartos/quarto/${quarto.quartoId}`}>Ver detalhes do quarto</a>
                   </div>
                 </div>
               </div>
@@ -44,6 +46,8 @@ const ListaQuartos= () => {
           </div>
         </div>
       </div>
+    </div>
+    <Footer></Footer>
     </div>
   );
 };
