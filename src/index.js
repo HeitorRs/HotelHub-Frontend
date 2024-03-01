@@ -12,6 +12,7 @@ import DetalhesHotel from './views/DetalhesHotel';
 import ListaQuartos from './views/ListaQuartos';
 import DetalhesQuarto from './views/DetalhesQuarto';
 import HotelCadastro from './views/HotelCadastro';
+import HotelDelete from './views/HotelDelete';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -26,6 +27,7 @@ root.render(
       <Route path='/Quartos/:id' Component={ListaQuartos}/>
       <Route path='/Quartos/quarto/:id' Component={DetalhesQuarto}/>
       <Route path='/Cadastro/Hotel' Component={HotelCadastro}/>
+      <Route path='/Delete/Hotel/:id' Component={HotelDelete}/>
       <Route path='*' Component={ErrorPage} />
     </Routes>
   </BrowserRouter>
