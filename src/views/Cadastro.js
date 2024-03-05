@@ -35,7 +35,6 @@ function Cadastro() {
   };
   return (
     <div>
-        <Header></Header>
         <div class="d-flex flex-column min-vh-100">
         <div class="row justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
@@ -71,7 +70,6 @@ function Cadastro() {
             </div>
         </div>
         </div>
-        <Footer></Footer>
     </div>
   );
 }

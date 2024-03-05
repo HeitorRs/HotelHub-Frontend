@@ -63,7 +63,6 @@ function HotelCadastro() {
 
   return (
     <div className="wrapper">
-      <Header />
       <h1 className="title">Cadastro de Hotel</h1>
       <div className="container">
         <div className="card">
@@ -87,7 +86,6 @@ function HotelCadastro() {
           </form>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

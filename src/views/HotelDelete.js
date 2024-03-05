@@ -48,8 +48,7 @@ function HotelDelete() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-  <Header />
+  <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
     <div className="card" style={{ padding: '20px', marginBottom: '20px', textAlign: 'center', maxWidth: '400px', width: '100%' }}>
       <h2>Excluir Hotel</h2>
@@ -61,7 +60,6 @@ function HotelDelete() {
       </div>
     </div>
   </div>
-  <Footer />
 </div>
   );
 }

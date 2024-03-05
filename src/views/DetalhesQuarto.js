@@ -19,8 +19,6 @@ const DetalhesQuarto = () => {
   }, [id]);
 
   return (
-    <div >
-    <Header></Header>
     <div class="d-flex flex-column min-vh-100">
       <h2>Detalhes do Quarto</h2>
       {quarto && Object.keys(quarto).length !== 0 ? (
@@ -50,8 +48,6 @@ const DetalhesQuarto = () => {
       ) : (
         <p>Carregando...</p>
       )}
-    </div>
-    <Footer></Footer>
     </div>
   );
 };

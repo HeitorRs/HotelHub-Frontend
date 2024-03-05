@@ -59,8 +59,6 @@ const ListaQuartos = () => {
   }
 
   return (
-    <div>
-      <Header />
       <div className="d-flex flex-column min-vh-100">
         <h2 className="m-3 d-flex justify-content-center">Quartos</h2>
         <div className="album py-5">
@@ -86,8 +84,6 @@ const ListaQuartos = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </div>
   );
 };
 
