@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Header from './shared/Header';
-import Footer from './shared/Footer';
 import "./HotelDelete.css"
 
 function HotelDelete() {
@@ -14,7 +12,12 @@ function HotelDelete() {
   useEffect(() => {
     const fetchHotel = async () => {
       try {
-        const response = await axios.get(`https://localhost:7074/api/Hotels/${id}`);
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`https://localhost:7074/api/Hotels/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         setHotel(response.data);
       } catch (error) {
         setError('Erro ao carregar hotel.');
@@ -27,7 +30,12 @@ function HotelDelete() {
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`https://localhost:7074/api/Hotels/delete/${id}`);
+      const token = localStorage.getItem('token');
+      await axios.delete(`https://localhost:7074/api/Hotels/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       navigate('/');
     } catch (error) {
       setError('Erro ao excluir hotel.');
@@ -48,19 +56,19 @@ function HotelDelete() {
   }
 
   return (
-  <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-    <div className="card" style={{ padding: '20px', marginBottom: '20px', textAlign: 'center', maxWidth: '400px', width: '100%' }}>
-      <h2>Excluir Hotel</h2>
-      <div>
-        <p>Nome: {hotel.nome}</p>
-        <p>Cidade: {hotel.cidade}</p>
-        <button style={{ backgroundColor: 'red', color: 'white', marginRight: '10px' }} onClick={handleConfirmDelete}>Confirmar Exclusão</button>
-        <button onClick={handleCancel}>Cancelar</button>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="card" style={{ padding: '20px', marginBottom: '20px', textAlign: 'center', maxWidth: '400px', width: '100%' }}>
+          <h2>Excluir Hotel</h2>
+          <div>
+            <p>Nome: {hotel.nome}</p>
+            <p>Cidade: {hotel.cidade}</p>
+            <button style={{ backgroundColor: 'red', color: 'white', marginRight: '10px' }} onClick={handleConfirmDelete}>Confirmar Exclusão</button>
+            <button onClick={handleCancel}>Cancelar</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
   );
 }
 

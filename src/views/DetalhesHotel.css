@@ -1,0 +1,5 @@
+.carousel-image {
+    height: 300px; /* Defina a altura desejada para as imagens */
+    width: auto; /* A largura será ajustada automaticamente para manter a proporção */
+    object-fit: cover; /* Garante que a imagem cubra a área especificada */
+  }

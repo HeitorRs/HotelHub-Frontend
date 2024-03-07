@@ -32,35 +32,47 @@ const HospedeLogin = () => {
       window.location.href = '/';
     } catch (error) {
       // Tratar o erro caso o email ou senha sejam incorretos
-      setError('Email ou senha incorretos.');
+      setError('Email ou Senha incorretos');
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
+    <div className="container d-flex justify-content-center align-items-center min-vh-100">
+      <div className="card">
+        <h2 className="text-center">Login</h2>
+        {error && <p className="text-center" style={{ color: 'red' }}>{error}</p>}
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="senha" className="form-label">Senha:</label>
+              <input
+                type="password"
+                id="senha"
+                name="senha"
+                value={formData.senha}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+            <div className="row justify-content-center">
+              <div className="col-4">
+                <button type="submit" className="btn btn-primary">Entrar</button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div>
-          <label>Senha:</label>
-          <input
-            type="password"
-            name="senha"
-            value={formData.senha}
-            onChange={handleChange}
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Entrar</button>
-      </form>
+      </div>
     </div>
   );
 };

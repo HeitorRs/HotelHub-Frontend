@@ -1,6 +1,7 @@
-import React, {useState} from "react";
-import {useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import "./Login.css";
 
 function Login() {
     const navigate = useNavigate();
@@ -14,48 +15,48 @@ function Login() {
             Senha
         };
         try {
-        const response = await axios.post("https://localhost:7074/api/Hospedes", data);
+            const response = await axios.post("https://localhost:7074/api/Hospedes", data);
 
-        if (response.status === 200) {
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('userId', response.data.hospdeId)
-        } else {
-            console.log(response.data);
-        }
+            if (response.status === 200) {
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('userId', response.data.hospdeId)
+            } else {
+                console.log(response.data);
+            }
         } catch (error) {
-        console.log(error);
+            console.log(error);
         }
-        navigate("/")
-  };
-  return (
-    <div class="d-flex flex-column min-vh-100">
-    <div class="row justify-content-center">
-        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-            <div class="card">
-                <h3 class="text-center mb-4">Login</h3>
-                <form class="form-card" onSubmit={handleSubmit}>
-                    <div class="form-group"> 
-                        <label class="form-control-label">Email</label>
-                        <input type="email" id="email" class="form-control" value={Email} onChange={(e) => setEmail(e.target.value)}/> 
-                    </div>
-                    <div class="form-group"> 
-                        <label class="form-control-label">Senha</label>
-                        <input type="password" id="senha" class="form-control" value={Senha} onChange={(e) => setPassword(e.target.value)}/>
-                    </div>
-                    <div className='row d-flex justify-content-center'>
-                        <div class="form-group"> 
-                            <button type="submit" class="btn btn-primary">Login</button> 
+        navigate("/");
+    };
+
+    return (
+        <div className="container-fluid">
+            <div className="row justify-content-center align-items-center min-vh-100">
+                <div className="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                    <div className="card">
+                        <h3 className="text-center">Login</h3>
+                        <div className="card-body">
+                            <form className="form-card" onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">Email</label>
+                                    <input type="email" id="email" className="form-control" value={Email} onChange={(e) => setEmail(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="senha" className="form-label">Senha</label>
+                                    <input type="password" id="senha" className="form-control" value={Senha} onChange={(e) => setPassword(e.target.value)} />
+                                </div>
+                                <div className="row justify-content-center">
+                                    <div className="col-4">
+                                        <button type="submit" className="btn btn-primary w-100">Login</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group align-self-start"> 
-                            <a href='./Cadastro'>Criar conta</a> 
-                        </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
-  );
+    );
 }
 
 export default Login;

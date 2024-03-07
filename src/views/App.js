@@ -15,7 +15,7 @@ import HospedePerfil from './HospedePerfil';
 
 function App() {
   return (
-  <div>
+  <div class="h-100 w-100">
   <BrowserRouter>
   <Header></Header>
     <Routes>

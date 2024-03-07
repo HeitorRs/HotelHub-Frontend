@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Header from './shared/Header';
-import Footer from './shared/Footer';
 import "./HotelCadastro.css"
 
 function HotelCadastro() {
@@ -12,7 +10,7 @@ function HotelCadastro() {
     admhotelId: 1
   });
   const [photoUrl, setPhotoUrl] = useState('');
-  const [photoCount, setPhotoCount] = useState(0);
+  const [photoUrls, setPhotoUrls] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (event) => {
@@ -24,12 +22,8 @@ function HotelCadastro() {
 
   const handleAddPhoto = () => {
     if (photoUrl.trim() !== '') {
-      setFormData({
-        ...formData,
-        fotos: formData.fotos !== '' ? `${formData.fotos},${photoUrl}` : photoUrl
-      });
+      setPhotoUrls([...photoUrls, photoUrl]);
       setPhotoUrl('');
-      setPhotoCount(photoCount + 1);
     }
   };
 
@@ -37,13 +31,15 @@ function HotelCadastro() {
     event.preventDefault();
 
     // Verifica se algum dos campos está vazio
-    if (!formData.nome || !formData.descricao || !formData.cidade) {
+    if (!formData.nome || !formData.descricao || !formData.cidade || photoUrls.length === 0) {
       setErrorMessage('Por favor, preencha todos os campos e adicione no mínimo 1 imagem.');
       return;
     }
 
     try {
-      const response = await fetch(`https://localhost:7074/api/Hotels?nome=${formData.nome}&descricao=${formData.descricao}&cidade=${formData.cidade}&admhotelId=${formData.admhotelId}&fotos=${formData.fotos}`, {
+      const fotos = photoUrls.join(',');
+      console.log(fotos)
+      const response = await fetch(`https://localhost:7074/api/Hotels?nome=${formData.nome}&descricao=${formData.descricao}&cidade=${formData.cidade}&admhotelId=${formData.admhotelId}&fotos=${fotos}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -80,7 +76,7 @@ function HotelCadastro() {
             <label>Fotos(URL):</label>
             <input type="text" value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} />
             <button type="button" onClick={handleAddPhoto}>Adicionar Foto</button>
-            <p>Total de fotos adicionadas: {photoCount}</p>
+            <p>Total de fotos adicionadas: {photoUrls.length}</p>
 
             <button type="submit">Cadastrar Hotel</button>
           </form>
