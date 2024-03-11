@@ -15,11 +15,12 @@ function Login() {
             Senha
         };
         try {
-            const response = await axios.post("https://localhost:7074/api/Hospedes", data);
+            const response = await axios.post("https://localhost:7074/Login", data);
 
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.token);
-                localStorage.setItem('userId', response.data.hospdeId)
+                localStorage.setItem('userId', response.data.id);
+                localStorage.setItem('role', response.data.tipo);
             } else {
                 console.log(response.data);
             }

@@ -19,19 +19,17 @@ const HospedeLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://localhost:7074/api/Hospedes/Login', {
+      const response = await axios.post('https://localhost:7074/user/login', {
         email: formData.email,
         senha: formData.senha
       });
-      // Limpar o erro caso a autenticação seja bem-sucedida
       setError('');
       console.log(response.data.token)
-      // Aqui você pode armazenar o token retornado no localStorage
       localStorage.setItem('token', response.data.token);
-      // Redirecionar para a página principal
+      localStorage.setItem('userId', response.data.id);
+      localStorage.setItem('role', response.data.tipo);
       window.location.href = '/';
     } catch (error) {
-      // Tratar o erro caso o email ou senha sejam incorretos
       setError('Email ou Senha incorretos');
     }
   };

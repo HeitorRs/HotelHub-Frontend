@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./HotelCadastro.css"
 
 function HotelCadastro() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nome: '',
     descricao: '',
@@ -12,6 +14,13 @@ function HotelCadastro() {
   const [photoUrl, setPhotoUrl] = useState('');
   const [photoUrls, setPhotoUrls] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    const userType = localStorage.getItem('userType');
+    if (userType !== 'AdmHotel') {
+      navigate('*'); // Redireciona para a tela de erro
+    }
+  }, [navigate]);
 
   const handleChange = (event) => {
     setFormData({
@@ -51,7 +60,7 @@ function HotelCadastro() {
       }
 
       // Se a resposta for bem-sucedida, redirecione para a página principal
-      window.location.href = '/'; // Redireciona para a página principal
+      navigate('/'); // Redireciona para a página principal
     } catch (error) {
       console.error('Erro ao fazer a requisição:', error);
     }

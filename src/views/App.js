@@ -3,7 +3,7 @@ import Footer from './shared/Footer';
 import ListaHoteis from './ListaHoteis';
 import ErrorPage from './ErrorPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Cadastro from './Cadastro';
+import HospedeCadastro from './HospedeCadastro';
 import DetalhesHotel from './DetalhesHotel';
 import ListaQuartos from './ListaQuartos';
 import DetalhesQuarto from './DetalhesQuarto';
@@ -12,6 +12,7 @@ import HotelDelete from './HotelDelete';
 import HospedeLogin from './HospedeLogin';
 import PrivateRoute from './PrivateRoute';
 import HospedePerfil from './HospedePerfil';
+import AdmHotelCadastro from './AdmHotelCadastro'
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
   <Header></Header>
     <Routes>
       <Route path='/' element={<PrivateRoute><ListaHoteis/></PrivateRoute>}/>
-      <Route path='/Cadastro' element={<Cadastro/>}/>
+      <Route path='/CadastroHospede' element={<HospedeCadastro/>}/>
+      <Route path='/CadastroAdmHotel' element={<AdmHotelCadastro/>}/>
       <Route path='/Hotel/:id' element={<PrivateRoute><DetalhesHotel/></PrivateRoute>}/>
       <Route path='/Quartos/:id' element={<PrivateRoute><ListaQuartos/></PrivateRoute>}/>
       <Route path='/Quartos/quarto/:id' element={<PrivateRoute><DetalhesQuarto/></PrivateRoute>}/>
