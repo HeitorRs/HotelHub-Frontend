@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./Login.css";
+import { jwtDecode } from 'jwt-decode';
 
 function Login() {
     const navigate = useNavigate();
@@ -19,8 +20,6 @@ function Login() {
 
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.token);
-                localStorage.setItem('userId', response.data.id);
-                localStorage.setItem('role', response.data.tipo);
             } else {
                 console.log(response.data);
             }

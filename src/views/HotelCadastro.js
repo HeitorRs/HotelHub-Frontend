@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./HotelCadastro.css"
+import { jwtDecode } from 'jwt-decode';
 
 function HotelCadastro() {
   const navigate = useNavigate();
@@ -14,11 +15,13 @@ function HotelCadastro() {
   const [photoUrl, setPhotoUrl] = useState('');
   const [photoUrls, setPhotoUrls] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const token = localStorage.getItem('token');
+  const userType = jwtDecode(token).role;
+  
 
   useEffect(() => {
-    const userType = localStorage.getItem('userType');
     if (userType !== 'AdmHotel') {
-      navigate('*'); // Redireciona para a tela de erro
+      navigate('*'); 
     }
   }, [navigate]);
 
@@ -47,12 +50,23 @@ function HotelCadastro() {
 
     try {
       const fotos = photoUrls.join(',');
-      console.log(fotos)
-      const response = await fetch(`https://localhost:7074/api/Hotels?nome=${formData.nome}&descricao=${formData.descricao}&cidade=${formData.cidade}&admhotelId=${formData.admhotelId}&fotos=${fotos}`, {
+      const userId = jwtDecode(token).nameid;
+
+      const requestData = {
+        nome: formData.nome,
+        descricao: formData.descricao,
+        cidade: formData.cidade,
+        admhotelId: userId,
+        fotos: fotos
+      };
+
+        const response = await fetch('https://localhost:7074/api/Hotels', {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify(requestData) // Converter objeto para JSON
       });
 
       if (!response.ok) {

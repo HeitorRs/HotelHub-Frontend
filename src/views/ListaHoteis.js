@@ -7,7 +7,7 @@ const Body = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('token'); // Obtenha o token do localStorage
+    const token = localStorage.getItem('token');
 
     axios.get('https://localhost:7074/api/Hotels', {
       headers: {
