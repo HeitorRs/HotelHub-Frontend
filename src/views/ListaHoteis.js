@@ -53,8 +53,7 @@ const Body = () => {
                       </div>
                       <div className="card-body">
                         <p><b>Cidade:</b><br />{hotel.cidade}</p>
-                        <p className="card-text"><b>Descrição:</b><br />{hotel.descricao}</p>
-                        <a href={`/hotel/${hotel.hotelId}`}>Ver Detalhes</a>
+                        <a href={`/hotel/${hotel.hotelId}`}>Ver mais</a>
                       </div>
                     </div>
                   </div>

@@ -10,8 +10,9 @@ import HotelCadastro from './HotelCadastro';
 import HotelDelete from './HotelDelete';
 import HospedeLogin from './HospedeLogin';
 import PrivateRoute from './PrivateRoute';
-import HospedePerfil from './HospedePerfil';
+import Perfil from './Perfil';
 import Cadastro from './Cadastro'
+import QuartoCadastro from './QuartoCadastro';
 
 function App() {
   return (
@@ -24,9 +25,10 @@ function App() {
       <Route path='/Hotel/:id' element={<PrivateRoute><DetalhesHotel/></PrivateRoute>}/>
       <Route path='/Quartos/:id' element={<PrivateRoute><ListaQuartos/></PrivateRoute>}/>
       <Route path='/Quartos/quarto/:id' element={<PrivateRoute><DetalhesQuarto/></PrivateRoute>}/>
+      <Route path='/Quarto/Cadastro/:id' element={<PrivateRoute><QuartoCadastro/></PrivateRoute>}/>
       <Route path='/Hotel/Cadastro' element={<PrivateRoute><HotelCadastro/></PrivateRoute>}/>
       <Route path='/Delete/Hotel/:id' element={<PrivateRoute><HotelDelete/></PrivateRoute>}/>
-      <Route path='/Perfil/:id' element={<PrivateRoute><HospedePerfil/></PrivateRoute>}/>
+      <Route path='/Perfil' element={<PrivateRoute><Perfil/></PrivateRoute>}/>
       <Route path='/Login' element={<HospedeLogin/>}/>
       <Route path='*' element={<ErrorPage/>} />
     </Routes>

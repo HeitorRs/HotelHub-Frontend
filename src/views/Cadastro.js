@@ -29,12 +29,6 @@ const Cadastro = () => {
         if (response.status === 200) {
           const token = response.data.token; 
           localStorage.setItem('token', token);
-
-          const decodedToken = jwtDecode(token);
-          const userId = decodedToken.userId;
-          const role = decodedToken.role;
-          localStorage.setItem('userId', userId);
-          localStorage.setItem('role', role);
           
         } else {
           console.log(response.data);

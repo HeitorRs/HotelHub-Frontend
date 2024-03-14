@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
 import '../App.css';
-import Header from './shared/Header';
-import Footer from './shared/Footer';
+import { jwtDecode } from "jwt-decode";
 
 const ListaQuartos = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [listaQuartos, setListaQuartos] = useState([]);
   const [error, setError] = useState(null);
+  const userType = jwtDecode(localStorage.getItem("token")).role
+  const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(id)
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://localhost:7074/api/Quartos/${id}`);
+        const response = await axios.get(`https://localhost:7074/quartos/${id}`);
         setListaQuartos(response.data);
+        clearTimeout(timeout);
         setLoading(false);
       } catch (error) {
         console.error('Erro ao buscar os dados:', error);
-        setError('Erro ao buscar os dados.');
+        setError('Este hotel não possui quartos cadastrados no momento :(');
+        clearTimeout(timeout)
         setLoading(false);
       }
     };
@@ -36,25 +40,23 @@ const ListaQuartos = () => {
 
   if (loading) {
     return (
-      <div>
-        <Header />
         <div className="d-flex justify-content-center align-items-center min-vh-100">
           <h3>Carregando...</h3>
         </div>
-        <Footer />
-      </div>
     );
   }
 
   if (error) {
     return (
-      <div>
-        <Header />
         <div className="d-flex justify-content-center align-items-center min-vh-100">
+          <div className="d-flex flex-column">
           <h3>{error}</h3>
+          {userType === 'AdmHotel' && (
+                <button className="btn btn-primary mt-3" onClick={() => navigate(`/Quarto/Cadastro/${id}`)}>Cadastrar primeiro quarto</button>
+              
+            )}
+          </div>
         </div>
-        <Footer />
-      </div>
     );
   }
 
@@ -73,9 +75,8 @@ const ListaQuartos = () => {
                       )}
                     </div>
                     <div className="card-body">
-                      <p><b>Preço:</b><br />R${quarto.preco}</p>
-                      <p className="card-text"><b>Descrição:</b><br />{quarto.descricao}</p>
-                      <a href={`/Quartos/quarto/${quarto.quartoId}`}>Ver detalhes do quarto</a>
+                      <p><b>Preço:</b><br></br>R${quarto.preco}</p>
+                      <a href={`/Quartos/quarto/${quarto.quartoId}`}>Ver mais</a>
                     </div>
                   </div>
                 </div>
