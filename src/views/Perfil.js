@@ -33,9 +33,9 @@ function UserProfile() {
   }, [token, userId]);
 
   return (
-    <div>
-      <h1 className="m-3 d-flex justify-content-center">Perfil do Usuário</h1>
-      <div className="d-flex flex-column min-vh-100 justify-content-center">
+    <div className="d-flex flex-column min-vh-100">
+      <h1 className="m-3 d-flex justify-content-center">Meu Perfil</h1>
+      <div className="d-flex flex-column min-vh-50 justify-content-center align-items-center">
         <div className="d-flex flex-column min-vh-10 justify-content-center align-items-center">
           <div className="card p-4">
             <p><b>Nome:</b> {userDetails.nome}</p>

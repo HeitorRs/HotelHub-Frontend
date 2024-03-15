@@ -13,6 +13,7 @@ import PrivateRoute from './PrivateRoute';
 import Perfil from './Perfil';
 import Cadastro from './Cadastro'
 import QuartoCadastro from './QuartoCadastro';
+import ReservaQuarto from './Reserva'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Route path='/Quarto/Cadastro/:id' element={<PrivateRoute><QuartoCadastro/></PrivateRoute>}/>
       <Route path='/Hotel/Cadastro' element={<PrivateRoute><HotelCadastro/></PrivateRoute>}/>
       <Route path='/Delete/Hotel/:id' element={<PrivateRoute><HotelDelete/></PrivateRoute>}/>
+      <Route path='/Reserva' element={<ReservaQuarto/>}/>
       <Route path='/Perfil' element={<PrivateRoute><Perfil/></PrivateRoute>}/>
       <Route path='/Login' element={<HospedeLogin/>}/>
       <Route path='*' element={<ErrorPage/>} />

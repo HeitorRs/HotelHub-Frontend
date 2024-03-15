@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './DetalhesHotel.css';
 
@@ -38,41 +38,39 @@ const DetalhesHotel = () => {
     setActiveIndex(prevIndex => (prevIndex === hotel.fotosHotel.length - 1 ? 0 : prevIndex + 1));
   };
 
-  if (unauthorized) {
-    return <Navigate to="/Login" />;
-  }
-
   return (
     <div className="d-flex flex-column min-vh-100">
     <h2 className="m-3 d-flex justify-content-center">Detalhes do Hotel</h2>
-    <div className="d-flex flex-column min-vh-10 justify-content-center align-items-center">
-      {hotel && Object.keys(hotel).length !== 0 ? (
-        <>
-          <h3>{hotel.nome}</h3>
-          <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel" data-bs-interval="false">
-            <div className="carousel-inner">
-              {hotel.fotosHotel.map((imagem, index) => (
-                <div className={`carousel-item ${index === activeIndex ? 'active' : ''}`} key={index}>
-                  <img className="carousel-image" src={imagem.nomeArquivo} alt={`Imagem ${index + 1} do ${hotel.nome}`} />
-                </div>
-              ))}
+    <div className="d-flex flex-column min-vh-50 justify-content-center align-items-center">
+      <div className="hotel-details">
+        {hotel && Object.keys(hotel).length !== 0 ? (
+          <>
+            <h3 className='m-3 d-flex justify-content-center'>{hotel.nome}</h3>
+            <div className="carousel">
+              <div className="carousel-inner">
+                {hotel.fotosHotel.map((imagem, index) => (
+                  <div className={`carousel-item ${index === activeIndex ? 'active' : ''}`} key={index}>
+                    <img className="carousel-image" src={imagem.nomeArquivo} alt={`Imagem ${index + 1} do ${hotel.nome}`} />
+                  </div>
+                ))}
+              </div>
+              <button className="carousel-control-prev" type="button" onClick={handlePrev}>
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Anterior</span>
+              </button>
+              <button className="carousel-control-next" type="button" onClick={handleNext}>
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Próximo</span>
+              </button>
             </div>
-            <button className="carousel-control-prev" type="button" onClick={handlePrev}>
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Anterior</span>
-            </button>
-            <button className="carousel-control-next" type="button" onClick={handleNext}>
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Próximo</span>
-            </button>
-          </div>
-          <p>Cidade: {hotel.cidade}</p>
-          <p>Descrição: {hotel.descricao}</p>
-          <a href={`/Quartos/${hotel.hotelId}`}>Ver Quartos</a>
-        </>
-      ) : (
-        <p>Carregando...</p>
-      )}
+            <p><strong>Cidade:</strong> {hotel.cidade}</p>
+            <p><strong>Descrição:</strong> {hotel.descricao}</p>
+            <a href={`/Quartos/${hotel.hotelId}`} className="btn btn-primary">Ver Quartos</a>
+          </>
+        ) : (
+          <p>Carregando...</p>
+        )}
+      </div>
     </div>
     </div>
   );
