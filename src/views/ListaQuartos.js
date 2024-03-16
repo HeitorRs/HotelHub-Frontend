@@ -5,7 +5,7 @@ import '../App.css';
 import { jwtDecode } from "jwt-decode";
 
 const ListaQuartos = () => {
-  const { id } = useParams();
+  const { hotelId } = useParams();
   const [loading, setLoading] = useState(true);
   const [listaQuartos, setListaQuartos] = useState([]);
   const [error, setError] = useState(null);
@@ -13,10 +13,9 @@ const ListaQuartos = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(id)
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://localhost:7074/quartos/${id}`);
+        const response = await axios.get(`https://localhost:7074/quartos/${hotelId}`);
         setListaQuartos(response.data);
         clearTimeout(timeout);
         setLoading(false);
@@ -36,7 +35,7 @@ const ListaQuartos = () => {
     fetchData();
 
     return () => clearTimeout(timeout);
-  }, [id]);
+  }, [hotelId]);
 
   if (loading) {
     return (
@@ -52,7 +51,7 @@ const ListaQuartos = () => {
           <div className="d-flex flex-column">
           <h3>{error}</h3>
           {userType === 'AdmHotel' && (
-                <button className="btn btn-primary mt-3" onClick={() => navigate(`/Quarto/Cadastro/${id}`)}>Cadastrar primeiro quarto</button>
+                <button className="btn btn-primary mt-3" onClick={() => navigate(`/Quarto/Cadastro/${hotelId}`)}>Cadastrar primeiro quarto</button>
               
             )}
           </div>
@@ -76,7 +75,7 @@ const ListaQuartos = () => {
                     </div>
                     <div className="card-body">
                       <p><b>Preço:</b><br></br>R${quarto.preco}</p>
-                      <a href={`/Quartos/quarto/${quarto.quartoId}`}>Ver mais</a>
+                      <a href={`/Quartos/${hotelId}/quarto/${quarto.quartoId}`}>Ver mais</a>
                     </div>
                   </div>
                 </div>

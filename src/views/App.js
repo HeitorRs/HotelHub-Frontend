@@ -14,6 +14,7 @@ import Perfil from './Perfil';
 import Cadastro from './Cadastro'
 import QuartoCadastro from './QuartoCadastro';
 import ReservaQuarto from './Reserva'
+import ReservasHospede from './UserReservas';
 
 function App() {
   return (
@@ -24,12 +25,13 @@ function App() {
       <Route path='/' element={<PrivateRoute><ListaHoteis/></PrivateRoute>}/>
       <Route path='/Cadastro' element={<Cadastro/>}/>
       <Route path='/Hotel/:id' element={<PrivateRoute><DetalhesHotel/></PrivateRoute>}/>
-      <Route path='/Quartos/:id' element={<PrivateRoute><ListaQuartos/></PrivateRoute>}/>
-      <Route path='/Quartos/quarto/:id' element={<PrivateRoute><DetalhesQuarto/></PrivateRoute>}/>
+      <Route path='/Quartos/:hotelId' element={<PrivateRoute><ListaQuartos/></PrivateRoute>}/>
+      <Route path='/Quartos/:hotelId/quarto/:quartoId' element={<PrivateRoute><DetalhesQuarto/></PrivateRoute>}/>
       <Route path='/Quarto/Cadastro/:id' element={<PrivateRoute><QuartoCadastro/></PrivateRoute>}/>
       <Route path='/Hotel/Cadastro' element={<PrivateRoute><HotelCadastro/></PrivateRoute>}/>
       <Route path='/Delete/Hotel/:id' element={<PrivateRoute><HotelDelete/></PrivateRoute>}/>
-      <Route path='/Reserva' element={<ReservaQuarto/>}/>
+      <Route path='/MinhasReservas' element={<PrivateRoute><ReservasHospede/></PrivateRoute>}/>
+      <Route path='/Reserva/:hotelId/quarto/:quartoId' element={<ReservaQuarto/>}/>
       <Route path='/Perfil' element={<PrivateRoute><Perfil/></PrivateRoute>}/>
       <Route path='/Login' element={<HospedeLogin/>}/>
       <Route path='*' element={<ErrorPage/>} />

@@ -45,7 +45,7 @@ function UserProfile() {
             {userType === 'Hospede' && (
               <div className="d-flex flex-column">
                 <button className="btn btn-primary mt-3" onClick={() => navigate('/editar')}>Editar Perfil</button>
-                <button className="btn btn-primary mt-3" onClick={() => navigate('/reservas')}>Ver minhas Reservas</button>
+                <button className="btn btn-primary mt-3" onClick={() => navigate('/MinhasReservas')}>Ver minhas Reservas</button>
                 <button className="btn btn-primary mt-3" onClick={() => navigate('/comentarios')}>Ver meus Comentários</button>
               </div>
             )}

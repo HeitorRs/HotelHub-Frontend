@@ -3,19 +3,19 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const DetalhesQuarto = () => {
-  const { id } = useParams();
+  const { hotelId, quartoId } = useParams();
   const [quarto, setQuarto] = useState({});
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    axios.get(`https://localhost:7074/quartos/detalhes/${id}`)
+    axios.get(`https://localhost:7074/quartos/detalhes/${quartoId}`)
       .then((response) => {
         setQuarto(response.data); 
       })
       .catch((error) => {
         console.error('Erro ao buscar os detalhes do quarto:', error);
       });
-  }, [id]);
+  }, [quartoId]);
 
   const handlePrev = () => {
     setActiveIndex(prevIndex => (prevIndex === 0 ? quarto.fotosQuarto.length - 1 : prevIndex - 1));
@@ -51,7 +51,7 @@ const DetalhesQuarto = () => {
             </div>
             <p><strong>Preço:</strong> {quarto.preco}</p>
             <p><strong>Descrição:</strong> {quarto.descricao}</p>
-            <a href={`/Reserva/${quarto.quartoId}`} className="btn btn-primary">Fazer uma reservar</a>
+            <a href={`/Reserva/${hotelId}/quarto/${quartoId}`} className="btn btn-primary">Fazer uma reservar</a>
           </>
         ) : (
           <p>Carregando...</p>
