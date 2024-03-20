@@ -38,8 +38,12 @@ function HotelDelete() {
       });
       navigate('/');
     } catch (error) {
-      setError('Erro ao excluir hotel.');
-      console.error('Erro ao excluir hotel:', error);
+      if (error.response && error.response.status === 400) {
+        setError('Este hotel não pode ser excluído porque existem reservas associadas a ele.');
+      } else {
+        setError('Erro ao excluir hotel.');
+        console.error('Erro ao excluir hotel:', error);
+      }
     }
   };
 
@@ -47,22 +51,19 @@ function HotelDelete() {
     navigate('/');
   };
 
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   if (!hotel) {
     return <div>Carregando...</div>;
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <div className="card" style={{ padding: '20px', marginBottom: '20px', textAlign: 'center', maxWidth: '400px', width: '100%' }}>
-          <h2>Excluir Hotel</h2>
+    <div className="d-flex flex-column min-vh-100">
+      <h1 className="m-3 d-flex justify-content-center">Excluir hotel</h1>
+      <div className="d-flex flex-column min-vh-50 justify-content-center align-items-center">
+        {error && <p className="text-center" style={{ color: 'red' }}>{error}</p>}
+        <div className="card p-4">
           <div>
-            <p>Nome: {hotel.nome}</p>
-            <p>Cidade: {hotel.cidade}</p>
+            <p><b>Nome:</b> {hotel.nome}</p>
+            <p><b>Cidade:</b> {hotel.cidade}</p>
             <button style={{ backgroundColor: 'red', color: 'white', marginRight: '10px' }} onClick={handleConfirmDelete}>Confirmar Exclusão</button>
             <button onClick={handleCancel}>Cancelar</button>
           </div>

@@ -52,7 +52,7 @@ function UserProfile() {
             {userType === 'AdmHotel' && (
               <div className="d-flex flex-column">
                 <button className="btn btn-primary mt-3" onClick={() => navigate('/editar')}>Editar Perfil</button>
-                <button className="btn btn-primary mt-3" onClick={() => navigate('/reservas')}>Ver meus Hoteis</button>
+                <button className="btn btn-primary mt-3" onClick={() => navigate('/MeusHoteis')}>Ver meus Hoteis</button>
               </div>
             )}
           </div>

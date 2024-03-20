@@ -44,7 +44,9 @@ const Cadastro = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center min-vh-100">
+    <div className="d-flex flex-column min-vh-100">
+    <h2 className="m-3 d-flex justify-content-center">Bem Vindo!</h2>
+    <div className="d-flex flex-column min-vh-50 justify-content-center align-items-center">
       <div className="card">
         <h3 className="text-center">Cadastro</h3>
         {error && <p className="text-center" style={{ color: 'red' }}>{error}</p>}
@@ -82,6 +84,7 @@ const Cadastro = () => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }

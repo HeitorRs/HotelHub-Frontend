@@ -33,6 +33,13 @@ const ReservasHospede = () => {
   return (
     <div className="d-flex flex-column min-vh-100">
       <h2 className="m-3 d-flex justify-content-center">Minhas Reservas</h2>
+      {reservas.length === 0 && (
+        <div className="d-flex justify-content-center align-items-center min-vh-100">
+        <div className="d-flex flex-column">
+          <h3>Você ainda não possui reservas</h3>
+          </div>
+        </div>
+      )}
       <div className="album py-5 ">
         <div className="container">
         <div className="row">
@@ -42,6 +49,7 @@ const ReservasHospede = () => {
                 <div key={reserva.id} className="col-md-4 mb-4">
                   <ReservaCard reserva={reserva} />
                 </div>
+                
               ))}
             </div>
           ))}
@@ -62,10 +70,11 @@ const ReservaCard = ({ reserva }) => {
   return (
     <div className="card mb-3">
       <div className="card-body">
-        <h5 className="card-title">{hotel.nome}</h5>
-        <p className="card-text">Data de Entrada: {formatarData(dataEntrada)}</p>
-        <p className="card-text">Data de Saída: {formatarData(dataSaida)}</p>
-        <Link to={`/reserva/${id}`} className="btn btn-primary">Detalhes</Link>
+        <p className="card-title"><b>Hotel:</b> {hotel.nome}</p>
+        <p className="card-text"><b>Data de Entrada:</b> {formatarData(dataEntrada)}</p>
+        <p className="card-text"><b>Data de Saída:</b> {formatarData(dataSaida)}</p>
+        <p className="card-text"><b>Valor total pago:</b> R${reserva.valorTotal}</p>
+        <a href={`/Reserva/Delete/${reserva.reservaId}`} className="btn btn-primary">Cancelar reserva</a>
       </div>
     </div>
   );

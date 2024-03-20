@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { DateRange  } from 'react-date-range';
+import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import axios from 'axios';
@@ -7,7 +7,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
 const ReservaQuarto = () => {
-  const { hotelId, quartoId } = useParams(); 
+  const { hotelId, quartoId } = useParams();
   const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
@@ -22,6 +22,8 @@ const ReservaQuarto = () => {
   const token = localStorage.getItem('token');
   const userId = jwtDecode(token).nameid;
   const navigate = useNavigate();
+  const precoDiaria = parseFloat(localStorage.getItem('preco')) || 0; // Obtem o preço da diária do local storage
+  const [precoTotal, setPrecoTotal] = useState(0); // Estado para armazenar o preço total calculado
 
   useEffect(() => {
     const fetchReservas = async () => {
@@ -59,24 +61,30 @@ const ReservaQuarto = () => {
   }, []);
 
   const formatDateTime = (date) => {
-    // Obtém as partes da data
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
-    
-    // Retorna a data formatada
+
     return `${day}/${month}/${year} ${hours}:${minutes}`;
   };
 
+  const calcularPreco = () => {
+    const dias = Math.ceil((dateRange[0].endDate - dateRange[0].startDate) / (1000 * 60 * 60 * 24)); // Calcula o número de dias
+    return dias * precoDiaria; // Retorna o preço total da reserva
+  };
+
+  useEffect(() => {
+    setPrecoTotal(calcularPreco()); // Atualiza o preço total quando as datas de reserva mudam
+  }, [dateRange, precoDiaria]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const dataentrada = formatDateTime(dateRange[0].startDate)
-    const datasaida = formatDateTime(dateRange[0].endDate)
-    console.log(dataentrada, datasaida)
+    const dataentrada = formatDateTime(dateRange[0].startDate);
+    const datasaida = formatDateTime(dateRange[0].endDate);
+    console.log(dataentrada, datasaida);
     try {
-      // Lógica para enviar os dados de reserva para a API
       const reservaData = {
         dataentrada: dataentrada,
         datasaida: datasaida,
@@ -86,10 +94,9 @@ const ReservaQuarto = () => {
         hospedeid: userId
       };
 
-      // Fazer a requisição POST para a API
       const response = await axios.post('https://localhost:7074/Reservar', reservaData);
 
-      navigate(`/MinhasReservas`); // Lidar com a resposta da API
+      navigate(`/MinhasReservas`);
     } catch (error) {
       console.error('Erro ao enviar reserva:', error);
     }
@@ -97,11 +104,11 @@ const ReservaQuarto = () => {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <h2 className="m-3 d-flex justify-content-center">Reservar Quarto</h2>
+      <h2 className="m-3 d-flex justify-content-center">Realizar reserva</h2>
       <div className="d-flex align-items-center container">
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Selecione o intervalo que deseja se hospedar:</label>
+          <div className="d-flex flex-column form-group">
+            <label className='m-3'><b>Selecione o período que deseja se hospedar:</b></label>
             <DateRange
               editableDateInputs={false}
               ranges={dateRange}
@@ -112,16 +119,19 @@ const ReservaQuarto = () => {
             />
           </div>
           <div className="form-group">
-            <label>Observação:</label>
+            <label><b>Observação:</b></label>
             <textarea
               className="form-control"
               value={observacao}
               onChange={(e) => setObservacao(e.target.value)}
             />
           </div>
-          <button type="submit" className="btn btn-primary">
-            Reservar
-          </button>
+          <div className="d-flex justify-content-center m-3">
+            <p>Preço Total: R${precoTotal.toFixed(2)}</p> {/* Exibe o preço total na interface */}
+          </div>
+          <div className="d-flex justify-content-center m-3">
+            <button type="submit" style={{background:"green", borderColor:"green"}} className="btn btn-primary">Reservar</button>
+          </div>
         </form>
       </div>
     </div>

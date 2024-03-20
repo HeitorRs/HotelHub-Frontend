@@ -4,7 +4,7 @@ import axios from "axios";
 import '../App.css';
 import { jwtDecode } from "jwt-decode";
 
-const ListaQuartos = () => {
+const AdmListaQuartos = () => {
   const { hotelId } = useParams();
   const [loading, setLoading] = useState(true);
   const [listaQuartos, setListaQuartos] = useState([]);
@@ -62,6 +62,9 @@ const ListaQuartos = () => {
   return (
       <div className="d-flex flex-column min-vh-100">
         <h2 className="m-3 d-flex justify-content-center">Quartos</h2>
+        <div className="d-flex justify-content-center">
+        <button className="btn btn-primary mt-3" onClick={() => navigate(`/Quarto/Cadastro/${hotelId}`)}>Adicionar quarto</button>
+        </div>
         <div className="album py-5">
           <div className="container">
             <div className="row">
@@ -75,7 +78,7 @@ const ListaQuartos = () => {
                     </div>
                     <div className="card-body">
                       <p><b>Preço:</b><br></br>R${quarto.preco}</p>
-                      <a className="btn btn-primary mt-3" href={`/Quartos/${hotelId}/quarto/${quarto.quartoId}`}>Ver mais</a>
+                      <a className="btn btn-primary mt-3" href={`/DetalheAdm/Quarto/${quarto.quartoId}`}>Ver mais</a><br></br>
                     </div>
                   </div>
                 </div>
@@ -87,4 +90,4 @@ const ListaQuartos = () => {
   );
 };
 
-export default ListaQuartos;
+export default AdmListaQuartos;

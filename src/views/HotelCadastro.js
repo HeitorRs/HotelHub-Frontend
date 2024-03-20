@@ -73,8 +73,7 @@ function HotelCadastro() {
         throw new Error('Erro ao enviar os dados.');
       }
 
-      // Se a resposta for bem-sucedida, redirecione para a página principal
-      navigate('/'); // Redireciona para a página principal
+      navigate('/MeusHoteis');
     } catch (error) {
       console.error('Erro ao fazer a requisição:', error);
     }

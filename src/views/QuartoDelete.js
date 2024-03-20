@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { jwtDecode } from "jwt-decode";
 
 const DetalhesQuarto = () => {
   const { hotelId, quartoId } = useParams();
   const [quarto, setQuarto] = useState({});
   const [activeIndex, setActiveIndex] = useState(0);
-  const userType = jwtDecode(localStorage.getItem("token")).role
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`https://localhost:7074/quartos/detalhes/${quartoId}`)
@@ -26,11 +23,6 @@ const DetalhesQuarto = () => {
 
   const handleNext = () => {
     setActiveIndex(prevIndex => (prevIndex === quarto.fotosQuarto.length - 1 ? 0 : prevIndex + 1));
-  };
-
-  const handleReservate = () => {
-    localStorage.setItem('preco', quarto.preco);
-    navigate(`/Reserva/${hotelId}/quarto/${quartoId}`)
   };
 
   return (
@@ -59,8 +51,7 @@ const DetalhesQuarto = () => {
             </div>
             <p><strong>Preço:</strong> {quarto.preco}</p>
             <p><strong>Descrição:</strong> {quarto.descricao}</p>
-            {userType === 'Hospede' &&
-                (<button className="btn btn-primary" onClick={handleReservate}>Fazer uma reservar</button>)}
+            <a href={`/Reserva/${hotelId}/quarto/${quartoId}`} className="btn btn-primary">Excluir quarto</a>
           </>
         ) : (
           <p>Carregando...</p>
