@@ -63,18 +63,18 @@ const ListaQuartos = () => {
       <div className="d-flex flex-column min-vh-100">
         <h2 className="m-3 d-flex justify-content-center">Quartos</h2>
         <div className="album py-5">
-          <div className="container">
-            <div className="row">
+          <div className="container w-100">
+            <div className="row justify-content-between">
               {listaQuartos.map((quarto) => (
                 <div className="col-md-4 mb-4" key={quarto.quartoId}>
-                  <div className="card">
+                  <div className="card mb-4">
                     <div>
                       {quarto.fotosQuarto.length > 0 && (
                         <img className="card-img-top" src={quarto.fotosQuarto[0].nomeArquivo} alt="Imagem do quarto" />
                       )}
                     </div>
                     <div className="card-body">
-                      <p><b>Preço:</b><br></br>R${quarto.preco}</p>
+                      <p><b>Preço diária:</b><br></br>R${quarto.preco}</p>
                       <a className="btn btn-primary mt-3" href={`/Quartos/${hotelId}/quarto/${quarto.quartoId}`}>Ver mais</a>
                     </div>
                   </div>

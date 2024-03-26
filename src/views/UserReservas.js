@@ -20,15 +20,7 @@ const ReservasHospede = () => {
     };
     fetchReservas();
   }, [userId]);
-
-  // Função para dividir as reservas em grupos de 3
-  const divideReservas = (reservas) => {
-    const grupos = [];
-    for (let i = 0; i < reservas.length; i += 3) {
-      grupos.push(reservas.slice(i, i + 3));
-    }
-    return grupos;
-  };
+ 
 
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -41,22 +33,17 @@ const ReservasHospede = () => {
         </div>
       )}
       <div className="album py-5 ">
-        <div className="container">
-        <div className="row">
-          {divideReservas(reservas).map((grupo, index) => (
-            <div key={index} className='d-flex'>
-              {grupo.map(reserva => (
+        <div className="container w-100">
+        <div className="row justify-content-between">
+              {reservas.map(reserva => (
                 <div key={reserva.id} className="col-md-4 mb-4">
                   <ReservaCard reserva={reserva} />
                 </div>
-                
               ))}
             </div>
-          ))}
         </div>
         </div>
       </div>
-    </div>
   );
 };
 

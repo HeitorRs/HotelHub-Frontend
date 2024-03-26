@@ -44,15 +44,17 @@ function UserProfile() {
             <p><b>Tipo de conta:</b> {userType}</p>
             {userType === 'Hospede' && (
               <div className="d-flex flex-column">
-                <button className="btn btn-primary mt-3" onClick={() => navigate('/editar')}>Editar Perfil</button>
+                <button className="btn btn-primary mt-3" onClick={() => navigate('/Perfil/Edit')}>Editar Perfil</button>
                 <button className="btn btn-primary mt-3" onClick={() => navigate('/MinhasReservas')}>Ver minhas Reservas</button>
                 <button className="btn btn-primary mt-3" onClick={() => navigate('/comentarios')}>Ver meus Comentários</button>
+                <button className="btn btn-primary mt-3" style={{ backgroundColor: 'red', borderColor: 'red'}} onClick={() => navigate('/Perfil/Delete')}>Excluir conta</button>
               </div>
             )}
             {userType === 'AdmHotel' && (
               <div className="d-flex flex-column">
                 <button className="btn btn-primary mt-3" onClick={() => navigate('/editar')}>Editar Perfil</button>
                 <button className="btn btn-primary mt-3" onClick={() => navigate('/MeusHoteis')}>Ver meus Hoteis</button>
+                <button className="btn btn-primary mt-3" style={{ backgroundColor: 'red', borderColor: 'red'}} onClick={() => navigate('/Perfil/Delete')}>Excluir conta</button>
               </div>
             )}
           </div>

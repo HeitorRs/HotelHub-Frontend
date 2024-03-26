@@ -37,7 +37,7 @@ const DetalhesQuarto = () => {
     <div className="d-flex flex-column min-vh-100">
     <h2 className="m-3 d-flex justify-content-center">Detalhes do Quarto</h2>
     <div className="d-flex flex-column min-vh-50 justify-content-center align-items-center">
-      <div className="hotel-details">
+      <div className="d-flex flex-column hotel-details w-50 justify-content-center align-items-center">
         {quarto && Object.keys(quarto).length !== 0 ? (
           <>
             <div className="carousel">
@@ -57,10 +57,12 @@ const DetalhesQuarto = () => {
                 <span className="visually-hidden">Próximo</span>
               </button>
             </div>
-            <p><strong>Preço:</strong> {quarto.preco}</p>
-            <p><strong>Descrição:</strong> {quarto.descricao}</p>
-            {userType === 'Hospede' &&
-                (<button className="btn btn-primary" onClick={handleReservate}>Fazer uma reservar</button>)}
+            <div className='m-4'>
+              <p><strong>Preço diária:</strong> R${quarto.preco}</p>
+              <p><strong>Descrição:</strong> {quarto.descricao}</p>
+              {userType === 'Hospede' &&
+                  (<button className="btn btn-primary" onClick={handleReservate}>Fazer uma reservar</button>)}
+            </div>
           </>
         ) : (
           <p>Carregando...</p>

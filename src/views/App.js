@@ -20,6 +20,8 @@ import ReservaDelete from './ReservaDelete';
 import AdmDetalheHotel from './AdmDetalheHotel';
 import AdmDetalhesQuarto from './AdmDetalheQuarto';
 import AdmListaQuartos from './AdmQuartos';
+import PerfilEdit from './PerfilEdit';
+import UserDelete from './PerfilDelete';
 
 function App() {
   return (
@@ -34,7 +36,7 @@ function App() {
       <Route path='/Quartos/:hotelId/quarto/:quartoId' element={<PrivateRoute><DetalhesQuarto/></PrivateRoute>}/>
       <Route path='/Quarto/Cadastro/:id' element={<PrivateRoute><QuartoCadastro/></PrivateRoute>}/>
       <Route path='/Hotel/Cadastro' element={<PrivateRoute><HotelCadastro/></PrivateRoute>}/>
-      <Route path='/Delete/Hotel/:id' element={<PrivateRoute><HotelDelete/></PrivateRoute>}/>
+      <Route path='/Hotel/Delete/:id' element={<PrivateRoute><HotelDelete/></PrivateRoute>}/>
       <Route path='/MinhasReservas' element={<PrivateRoute><ReservasHospede/></PrivateRoute>}/>
       <Route path='/Reserva/Delete/:id' element={<PrivateRoute><ReservaDelete/></PrivateRoute>}/>
       <Route path='/DetalheAdm/Hotel/:id' element={<PrivateRoute><AdmDetalheHotel/></PrivateRoute>}/>
@@ -43,6 +45,8 @@ function App() {
       <Route path='/MeusHoteis' element={<PrivateRoute><AdmHoteis/></PrivateRoute>}/>
       <Route path='/Reserva/:hotelId/quarto/:quartoId' element={<ReservaQuarto/>}/>
       <Route path='/Perfil' element={<PrivateRoute><Perfil/></PrivateRoute>}/>
+      <Route path='/Perfil/Edit' element={<PrivateRoute><PerfilEdit/></PrivateRoute>}/>
+      <Route path='/Perfil/Delete' element={<PrivateRoute><UserDelete/></PrivateRoute>}/>
       <Route path='/Login' element={<HospedeLogin/>}/>
       <Route path='*' element={<ErrorPage/>} />
     </Routes>

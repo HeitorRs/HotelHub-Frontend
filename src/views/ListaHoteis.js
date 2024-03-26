@@ -41,16 +41,15 @@ const Body = () => {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-  <h2 className="m-3 d-flex justify-content-center">Hotéis</h2>
-  <div className="d-flex justify-content-center"> {/* Centraliza o conteúdo */}
-    <div className="input-group mb-3" style={{ maxWidth: "300px" }}> {/* Define a largura máxima do input */}
+      <h2 className="m-3 d-flex justify-content-center">Hotéis</h2>
+      <div className="d-flex justify-content-center">
+      <div className="input-group mb-3" style={{ maxWidth: "300px" }}>
       <input type="text" className="form-control" placeholder="Digite o nome da cidade" value={filtroCidade} onChange={(e) => setFiltroCidade(e.target.value)} />
-      <div className="input-group-append"> {/* Adiciona o botão de filtro ao lado do input */}
+      <div className="input-group-append"> 
         <button className="btn btn-primary" onClick={filtrarPorCidade}>Filtrar</button>
       </div>
       </div>
       </div>
-      {/* Mostra o texto "Carregando..." enquanto os dados estão sendo carregados */}
       {loading && (
         <div className="d-flex justify-content-center align-items-center min-vh-100">
           <h3>Carregando...</h3>
@@ -62,9 +61,6 @@ const Body = () => {
         <>
           <div className="album py-5">
             <div className="container">
-              
-
-              {/* Centraliza os cards na página */}
               <div className="row justify-content-between">
                 {hoteisFiltrados.map((hotel) => (
                   <div className="col-md-4 mb-4" key={hotel.hotelId}>
@@ -88,11 +84,9 @@ const Body = () => {
           </div>
         </>
       )}
-
-      {/* Se ocorrer um erro ao carregar os dados, mostra uma mensagem de erro */}
       {!loading && hoteisFiltrados.length === 0 && (
         <div className="d-flex justify-content-center align-items-center min-vh-100">
-          <h3>Nenhum hotel encontrado para a cidade selecionada</h3>
+          <h3>Nenhum hotel encontrado</h3>
         </div>
       )}
     </div>

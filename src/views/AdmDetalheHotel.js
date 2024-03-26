@@ -43,7 +43,7 @@ const AdmDetalheHotel = () => {
     <div className="d-flex flex-column min-vh-100">
     <h2 className="m-3 d-flex justify-content-center">Detalhes do Hotel</h2>
     <div className="d-flex flex-column min-vh-50 justify-content-center align-items-center">
-      <div className="hotel-details">
+      <div className="d-flex flex-column hotel-details w-50 justify-content-center align-items-center">
         {hotel && Object.keys(hotel).length !== 0 ? (
           <>
             <h3 className='m-3 d-flex justify-content-center'>{hotel.nome}</h3>
@@ -64,10 +64,12 @@ const AdmDetalheHotel = () => {
                 <span className="visually-hidden">Próximo</span>
               </button>
             </div>
-            <p><strong>Cidade:</strong> {hotel.cidade}</p>
-            <p><strong>Descrição:</strong> {hotel.descricao}</p>
-            <a href={`/HotelAdm/Quartos/${hotel.hotelId}`} className="btn btn-primary">Ver Quartos</a><br></br>
-            <button className="btn btn-primary mt-3" onClick={() => navigate("/Hotel/Cadastro")}>Editar</button>
+            <div className='m-4'>
+              <p><strong>Cidade:</strong> {hotel.cidade}</p>
+              <p><strong>Descrição:</strong> {hotel.descricao}</p>
+              <a href={`/HotelAdm/Quartos/${hotel.hotelId}`} className="btn btn-primary">Ver Quartos</a><br></br>
+              <button className="btn btn-primary mt-3" onClick={() => navigate("/Hotel/Cadastro")}>Editar</button>
+            </div>
           </>
         ) : (
           <p>Carregando...</p>

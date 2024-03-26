@@ -61,7 +61,7 @@ const AdmHoteis = () => {
                       <div className="card-body">
                         <p><b>Cidade:</b><br />{hotel.cidade}</p>
                         <a className="btn btn-primary mt-3" href={`/DetalheAdm/Hotel/${hotel.hotelId}`}>Ver mais</a><br></br>
-                        <button className="btn btn-primary mt-3" style={{background:"red", borderColor:"red"}} onClick={() => navigate(`/Hote/delete/${hotel.hotelId}`)}>Excluir</button>
+                        <button className="btn btn-primary mt-3" style={{background:"red", borderColor:"red"}} onClick={() => navigate(`/Hotel/Delete/${hotel.hotelId}`)}>Excluir</button>
                       </div>
                     </div>
                   </div>

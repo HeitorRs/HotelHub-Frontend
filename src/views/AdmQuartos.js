@@ -67,7 +67,7 @@ const AdmListaQuartos = () => {
         </div>
         <div className="album py-5">
           <div className="container">
-            <div className="row">
+          <div className="row justify-content-between">
               {listaQuartos.map((quarto) => (
                 <div className="col-md-4 mb-4" key={quarto.quartoId}>
                   <div className="card">
@@ -77,7 +77,7 @@ const AdmListaQuartos = () => {
                       )}
                     </div>
                     <div className="card-body">
-                      <p><b>Preço:</b><br></br>R${quarto.preco}</p>
+                      <p><b>Preço diária:</b><br></br>R${quarto.preco}</p>
                       <a className="btn btn-primary mt-3" href={`/DetalheAdm/Quarto/${quarto.quartoId}`}>Ver mais</a><br></br>
                     </div>
                   </div>

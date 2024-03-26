@@ -42,7 +42,7 @@ const DetalhesHotel = () => {
     <div className="d-flex flex-column min-vh-100">
     <h2 className="m-3 d-flex justify-content-center">Detalhes do Hotel</h2>
     <div className="d-flex flex-column min-vh-50 justify-content-center align-items-center">
-      <div className="hotel-details">
+      <div className="d-flex flex-column hotel-details w-50 justify-content-center align-items-center">
         {hotel && Object.keys(hotel).length !== 0 ? (
           <>
             <h3 className='m-3 d-flex justify-content-center'>{hotel.nome}</h3>
@@ -50,7 +50,7 @@ const DetalhesHotel = () => {
               <div className="carousel-inner">
                 {hotel.fotosHotel.map((imagem, index) => (
                   <div className={`carousel-item ${index === activeIndex ? 'active' : ''}`} key={index}>
-                    <img className="carousel-image" src={imagem.nomeArquivo} alt={`Imagem ${index + 1} do ${hotel.nome}`} />
+                    <img className="carousel-image img-fluid w-100" style={{maxWidth: "500px"}} src={imagem.nomeArquivo} alt={`Imagem ${index + 1} do ${hotel.nome}`} />
                   </div>
                 ))}
               </div>
@@ -63,9 +63,11 @@ const DetalhesHotel = () => {
                 <span className="visually-hidden">Próximo</span>
               </button>
             </div>
-            <p><strong>Cidade:</strong> {hotel.cidade}</p>
-            <p><strong>Descrição:</strong> {hotel.descricao}</p>
-            <a href={`/Quartos/${hotel.hotelId}`} className="btn btn-primary">Ver Quartos</a>
+            <div className='m-4'>
+              <p><strong>Cidade:</strong> {hotel.cidade}</p>
+              <p><strong>Descrição:</strong> {hotel.descricao}</p>
+              <a href={`/Quartos/${hotel.hotelId}`} className="btn btn-primary">Ver Quartos</a>
+            </div>
           </>
         ) : (
           <p>Carregando...</p>
